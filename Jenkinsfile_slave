@@ -1,7 +1,7 @@
 
 pipeline {
 	agent {
-		label 'win-label-1'
+		label 'slave1'
 	} 
 
 	stages {
@@ -11,7 +11,7 @@ pipeline {
 		    }
 		stage('Build') {
 	        steps {
-				sh '/home/satya/distros/apache-maven-3.6.0/bin/mvn install'
+				sh 'JAVA_HOME=/home/satya/distros/jdk1.8.0_191 /home/satya/distros/apache-maven-3.6.0/bin/mvn install'
 	        }
 		}
 	}
