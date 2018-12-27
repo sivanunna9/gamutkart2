@@ -22,6 +22,9 @@ pipeline {
 			   sh 'sshpass -p "123" ssh satya@172.17.0.3 JAVA_HOME=/home/satya/distros/jdk1.8.0_191 /home/satya/distros/apache-tomcat-8.5.35/bin/startup.sh' 
                  }
                  }
+                 }
+                triggers {
+                 pollSCM('H/1 * * * *')
+                }
         }
-}
 
