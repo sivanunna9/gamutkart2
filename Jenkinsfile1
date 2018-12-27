@@ -1,5 +1,6 @@
 pipeline {
         agent any
+   
         parameters {
               choice(name: 'ENVIRONMENT', choices: ['QA', 'SIT'], description: 'Pick something')
            }
@@ -19,13 +20,17 @@ pipeline {
         	   if (ENVIRONMENT == 'QA'){
            		sh 'sshpass -p "123" scp target/gamutkart.war satya@172.17.0.3:/home/satya/distros/apache-tomcat-8.5.35/webapps'
 		        sh 'sshpass -p "123" ssh satya@172.17.0.3 "JAVA_HOME=/home/satya/distros/jdk1.8.0_191" "/home/satya/distros/apache-tomcat-8.5.35/bin/startup.sh"'
-                  echo "hello ${params.ENVIRONMENT}"
+                        echo "hello ${params.ENVIRONMENT}"
 		   }
-                else if (ENVIRONMENT == 'SIT'){
-                  sh 'sshpass -p "123" scp target/gamutkart.war satya@172.17.0.2:/home/satya/distros/apache-tomcat-8.5.35/webapps'
-                  sh 'sshpass -p "123" ssh satya@172.17.0.2 "JAVA_HOME=/home/satya/distros/jdk1.8.0_191" "/home/satya/distros/apache-tomcat-8.5.35/bin/startup.sh"'
-                }
-                 }}}
-     }
-   }
+                  else if (ENVIRONMENT == 'SIT'){
+                        sh 'sshpass -p "123" scp target/gamutkart.war satya@172.17.0.2:/home/satya/distros/apache-tomcat-8.5.35/webapps'
+                        sh 'sshpass -p "123" ssh satya@172.17.0.2 "JAVA_HOME=/home/satya/distros/jdk1.8.0_191" "/home/satya/distros/apache-tomcat-8.5.35/bin/startup.sh"'
+                  }
+                 
+	 	}}}
+           }
+           triggers {
+        	 cron('H/1 * * * *')
+		}
+  	 }
   
