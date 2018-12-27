@@ -3,7 +3,7 @@ pipeline {
          parameters {
         
     
-     choice(name: 'ENVIRONMENT', choices: ['One', 'Two', 'Three'], description: 'Pick something')
+     choice(name: 'ENVIRONMENT', choices: ['QA', 'SIT'], description: 'Pick something')
            }
           stages {
             stage('Checkout') {
