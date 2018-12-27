@@ -6,17 +6,16 @@ pipeline {
           stages {
             stage('Checkout') {
                 steps {
-                                checkout scm                            }
-                    }
+                       checkout scm                 
+                    }}
                 stage('Build') {
                 steps {
-                                sh ('/home/sai/distros/apache-maven-3.6.0/bin/mvn install')
-                }
-                }
+                                sh '/home/sai/distros/apache-maven-3.6.0/bin/mvn install'
+            }}
                 stage('Deployment') {
                       steps {
                      
-                       Scrpit {
+                       Script {
 
          
        if (ENVIRONMENT == 'QA'){
