@@ -9,7 +9,7 @@
        // }
    // }
 //}
-
+pipeline{
 agent {
     dockerfile {
         filename 'Dockerfile.build'
@@ -19,4 +19,4 @@ agent {
         registryCredentialsId 'myPredefinedCredentialsInJenkins'
     }
 }
-
+}
