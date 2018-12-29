@@ -1,11 +1,20 @@
 pipeline {
+
+
+pipeline {
+        agent any
+
+        stages {
+            stage('Checkout') {
+                steps {
+                                checkout scm                            }
+                    }
+                stage('Build') {
+                steps {
+                                sh ('/home/sai/distros/apache-maven-3.6.0/bin/mvn install')
+                }
+                }
+
   agent  { dockerfile true }
-    stages {
-        stage('Test') {
-            steps {
-                sh 'node --version'
-                sh 'svn --version'
-            }
-        }
-   }
+    
 }
