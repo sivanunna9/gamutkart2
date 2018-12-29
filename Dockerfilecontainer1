@@ -1,11 +1,22 @@
-pipeline {
-    agent any { dockerfile true }
-    stages {
-        stage('Test') {
-            steps {
-                sh 'node --version'
-                sh 'svn --version'
-            }
-        }
+//pipeline {
+ // agent  { dockerfile true }
+  //  stages {
+ //       stage('Test') {
+   //         steps {
+     //           sh 'node --version'
+       //         sh 'svn --version'
+         //   }
+       // }
+   // }
+//}
+
+agent {
+    dockerfile {
+        filename 'Dockerfile.build'
+        dir 'build'
+        label 'my-defined-label'
+        registryUrl 'https://myregistry.com/'
+        registryCredentialsId 'myPredefinedCredentialsInJenkins'
     }
 }
+
