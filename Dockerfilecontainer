@@ -5,17 +5,13 @@ pipeline {
             agent {
                 docker { image 'siva1995/nginx-image' }
             }
-            steps {
-                sh 'mvn --version'
-            }
+            
         }
         stage('Front-end') {
             agent {
                 docker { image 'siva1995/nginx-img' }
             }
-            steps {
-                sh 'node --version'
-            }
+           
         }
     }
 } 
