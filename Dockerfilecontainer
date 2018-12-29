@@ -11,7 +11,7 @@ pipeline {
         }
         stage('Front-end') {
             agent {
-                docker { image 'siva1995/myimage1' }
+                docker { image 'siva1995/nginx-img' }
             }
             steps {
                 sh 'node --version'
