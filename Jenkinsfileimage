@@ -1,32 +1,18 @@
-echo "Branch name: ${BRANCH_NAME}"
-BUILD = BRANCH_NAME == 'master' ? 'latest' : BRANCH_NAME
-echo "Build: ${BUILD}"
+pipeline {
+        agent any
 
-node ('master') {
-    checkout scm
-    echo "Build: ${BUILD}"
-    stage ('Build Building container') {
-        echo "Build: ${BUILD}"
-        sh "sudo docker build -t siva1995/rrr:${BUILD} ."
-    }
-    stage ('Build in Container') {
-        def CONTAINER_ID = sh (
-                script: "sudo docker run -d --network=host siva1995/rrr:${BUILD}",
-                returnStdout: true
-        ).trim()
-        echo "Container id: ${CONTAINER_ID}"
+        stages {
+            stage('Checkout') {
+                steps {
+                                checkout scm                            }
+                    }
+                stage('Build') {
+                steps {
+                                sh ('/home/sai/distros/apache-maven-3.6.0/bin/mvn install')
+                }
+                }
 
-        sh "sudo docker exec ${CONTAINER_ID} ./gradlew build"
-        sh "sudo docker cp ${CONTAINER_ID}:/target/gamutkart.war /usr/local/tomcat/webapps"
-        sh "sudo docker stop ${CONTAINER_ID}"
-        sh "sudo docker rm ${CONTAINER_ID}"
-    }
+            agent { dockerfile true }
 
-    stage ('Build Container with latest Build') {
-        dir('docker') {
-            sh "sudo docker build -t siva1995/rrr:${BUILD} ."
-            sh "sudo docker push siva1995/rrr:${BUILD}"
-        }
-    }
-}
 
+}}
