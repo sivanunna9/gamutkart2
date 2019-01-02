@@ -13,4 +13,5 @@ do
     
 done
 
-docker inspect --format '{{.NetworkSettings.Networks.bridge.IPAddress}}' `docker ps -a -q`
+docker inspect --format '{{.NetworkSettings.Networks.bridge.IPAddress}}' `docker ps -a -q` >IP.txt
+
