@@ -10,4 +10,7 @@ do
     docker run --name www.gamutkart$i -d -it --rm siva1995/nginx-img:latest  /bin/bash
     echo "www.gamutkart$i container has been created!"
 	echo "=============================="
+    
 done
+
+docker inspect --format '{{.NetworkSettings.Networks.bridge.IPAddress}}' `docker ps -a -q`
