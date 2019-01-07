@@ -15,7 +15,7 @@ pipeline {
              stage ('Docker image'){
                steps {
                       sh 'docker build -t="siva1995/jenkins_image" .'
-                      sh 'docker login --siva1995 foo --SAIprasanth@123'
+                      sh 'docker login --siva1995  --SAIprasanth@123'
               
 
 
