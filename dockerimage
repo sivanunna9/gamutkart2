@@ -33,7 +33,7 @@ pipeline {
 
                  stage ('Creatingcontainers') {
                   steps {
-                   sh 'create-envjenkins.sh $DEPLOY_ENV'
+                   sh './create-envjenkins.sh $DEPLOY_ENV'
    }
 
    }
