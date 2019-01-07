@@ -1,7 +1,9 @@
 
 pipeline {
         agent any
-
+                parameters {
+         string(name: 'DEPLOY_ENV', defaultValue: 'staging', description: '')
+ }
         stages {
             stage('Checkout') {
                 steps {
@@ -18,15 +20,22 @@ pipeline {
                       }
                       }
 
-stage('Publish') {
-      when {
-        branch 'master'
-      }
-      steps {
-        withDockerRegistry([ credentialsId: "", url: "https://hub.docker.com" ]) {
-          sh 'docker push siva1995/jenkins_image:latest'
+               stage('Publish') {
+                   when {
+                    branch 'master'
+                                 }
+                    steps {
+                       withDockerRegistry([ credentialsId: "", url: "https://hub.docker.com" ]) {
+                        sh 'docker push siva1995/jenkins_image:latest'
        }
      }
     }
+
+                 stage('Creating containers'){
+                  step {
+                   sh ' create-envjenkins.sh $DEPLOY_ENV '
+   }
+
+   }
     }
    }
