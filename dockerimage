@@ -15,12 +15,18 @@ pipeline {
              stage ('Docker image'){
                steps {
                       sh 'docker build -t="siva1995/jenkins_image" .'
-                      sh 'docker login --siva1995  --SAIprasanth@123'
-              
+                      }
+                      }
 
-
-
-          }
-         }
+stage('Publish') {
+      when {
+        branch 'master'
+      }
+      steps {
+        withDockerRegistry([ credentialsId: "", url: "https://hub.docker.com/u/siva1995" ]) {
+          sh 'docker push siva1995/jenkins_image:latest'
        }
      }
+    }
+    }
+   }
