@@ -1,0 +1,25 @@
+
+pipeline {
+        agent any
+
+        stages {
+            stage('Checkout') {
+                steps {
+                                checkout scm                            }
+                    }
+                stage('Build') {
+                steps {
+                                sh ('/home/sai/distros/apache-maven-3.6.0/bin/mvn install')
+                }
+                }
+             stage ('Docker image'){
+               steps {
+                      sh 'docker build -t="siva1995/jenkins_image" .'
+              
+
+
+
+          }
+         }
+       }
+     }
