@@ -1,0 +1,32 @@
+
+
+pipeline {
+        agent any
+
+        stages {
+            stage('Checkout') {
+                steps {
+                                checkout scm                            }
+                    }
+                stage('Build') {
+                steps {
+                                sh ('/home/ubuntu/distros/apache-maven-3.6.0/bin/mvn install')
+                }
+                }
+         stage('Deployment') {
+                  steps { 
+                  sh 'scp target/gamutkart.war root@ec2-13-127-3-169.ap-south-1.compute.amazonaws.com:/root/distros/apache-tomcat-8.5.37/webapps'
+
+                    }
+                 }
+         stage('Startup') {
+			steps {
+   sh 'ssh root@ec2-13-127-3-169.ap-south-1.compute.amazonaws.com "JAVA_HOME=/root/distros/jdk1.8.0_191" "/root/distros/apache-tomcat-8.5.37/bin/startup.sh"' 
+                 }
+                 }
+                 }
+                triggers {
+                 pollSCM('H/1 * * * *')
+                }
+        }
+
