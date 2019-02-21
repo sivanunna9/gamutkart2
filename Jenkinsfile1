@@ -36,23 +36,7 @@ pipeline {
                  }
                   
 	 	}}}
-                      stage('mail'){
-                     mail body: 'project build successful',
-                      from: 'sivagopikishoren@gmail.com',
-                    replyTo: 'sivagopikishoren@gmail.com',
-                    subject: 'project build successful',
-                    to: 'sivagopikishoren@gmail.com'
-                 }
-             }
-             catch (err) {
-             currentBuild.result = "FAILURE"
-             mail body: "project build error is here: ${env.BUILD_URL}" ,
-             from: 'sivagopikishoren@gmail.com',
-              replyTo: 'sivakiran1995@gmail.com',
-             subject: 'project build failed',
-             to: 'sivakiran1995@gmail.com'
-              throw err
-        }
+                     
 
 
    } 
