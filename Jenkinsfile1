@@ -28,35 +28,35 @@ pipeline {
                         echo "hello ${params.ENVIRONMENT}"
 		   }
                   else if (ENVIRONMENT == 'SIT'){
-                        sh 'sshpass -p "123" scp target/gamutkart.war satya@172.17.0.2:/home/satya/distros/apache-tomcat-8.5.35/webapps'
-                        sh 'sshpass -p "123" ssh satya@172.17.0.2 "JAVA_HOME=/home/satya/distros/jdk1.8.0_191" "/home/satya/distros/apache-tomcat-8.5.35/bin/startup.sh"'
+                        sh 'sshpass -p "123" scp target/gamutkart.war satya@172.17.0.4:/home/satya/distros/apache-tomcat-8.5.35/webapps'
+                        sh 'sshpass -p "123" ssh satya@172.17.0.4 "JAVA_HOME=/home/satya/distros/jdk1.8.0_191" "/home/satya/distros/apache-tomcat-8.5.35/bin/startup.sh"'
                        
                           echo "hello ${params.ENVIRONMENT}"
 
                  }
                   
 	 	}}}
-          stage('mail'){
-mail body: 'project build successful',
-from: 'sivagopikishoren@gmail.com',
-replyTo: 'sivagopikishoren@gmail.com',
-subject: 'project build successful',
-to: 'sivagopikishoren@gmail.com'
-}
-}
-catch (err) {
-currentBuild.result = "FAILURE"
-mail body: "project build error is here: ${env.BUILD_URL}" ,
-from: 'sivagopikishoren@gmail.com',
-replyTo: 'sivakiran1995@gmail.com',
-subject: 'project build failed',
-to: 'sivakiran1995@gmail.com'
-throw err
-}
+                      stage('mail'){
+                     mail body: 'project build successful',
+                      from: 'sivagopikishoren@gmail.com',
+                    replyTo: 'sivagopikishoren@gmail.com',
+                    subject: 'project build successful',
+                    to: 'sivagopikishoren@gmail.com'
+                 }
+             }
+             catch (err) {
+             currentBuild.result = "FAILURE"
+             mail body: "project build error is here: ${env.BUILD_URL}" ,
+             from: 'sivagopikishoren@gmail.com',
+              replyTo: 'sivakiran1995@gmail.com',
+             subject: 'project build failed',
+             to: 'sivakiran1995@gmail.com'
+              throw err
+        }
 
 
- } 
+   } 
           
                    
-  	 }
+ }
   
