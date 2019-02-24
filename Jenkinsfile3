@@ -1,5 +1,8 @@
 
+<<<<<<< HEAD:Jenkinsfile3
 
+=======
+>>>>>>> 86f96aeb56586c4c075f7713cabcd772bc26466e:Jenkinsfile2
 pipeline {
         agent any
 
@@ -10,7 +13,7 @@ pipeline {
                     }
                 stage('Build') {
                 steps {
-                                sh ('/home/satya/distros/apache-maven-3.6.0/bin/mvn install')
+                                sh ('/home/siva/distros/apache-maven-3.6.0/bin/mvn install')
                 }
                 }
                 stage('Deployment') {
