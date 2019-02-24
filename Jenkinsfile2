@@ -1,5 +1,6 @@
 
 
+
 pipeline {
         agent any
 
@@ -10,7 +11,7 @@ pipeline {
                     }
                 stage('Build') {
                 steps {
-                                sh ('/root/satya/distros/apache-maven-3.6.0/bin/mvn install')
+                                sh ('/home/satya/distros/apache-maven-3.6.0/bin/mvn install')
                 }
                 }
                 stage('Deployment') {
