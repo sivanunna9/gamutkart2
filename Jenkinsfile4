@@ -1,0 +1,48 @@
+pipeline {
+        agent { docker 'siva1995/maven:latest' }
+
+        stages {
+            stage('Checkout') {
+                steps {
+                       sh '''
+                       rm -rf *
+                        git clone https://sivakiran9:Siva__787@github.com/sivakiran9/gamutkart2.git
+                        
+                        '''
+                                                       }
+                    }
+                stage('Build') {
+                steps {
+                           sh '''
+                            cd gamutkart2
+                            
+                            mvn clean install
+                            
+                            '''
+                           //     sh ('/home/satya/distros/apache-maven-3.6.0/bin/mvn install')
+                }
+                }
+                   stage('sonar') {
+            steps {
+                sh '''
+                cd gamutkart2 
+                mvn sonar:sonar \
+  -Dsonar.host.url=http://admin:admin@192.168.0.6:9000 \
+    -Dsonar.projectKey="gamutkart" -DsonarprojectName="gamutkart2"
+                
+                echo 'sonar is complted'
+                
+                '''
+            }
+        }
+            
+               stage('Deployment') {
+            steps {
+                echo 'deployment is done'
+            }
+        }
+            
+        }
+        
+        
+}
