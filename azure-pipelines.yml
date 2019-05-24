@@ -15,10 +15,20 @@ strategy:
       imageName: "vs2017-win2016"
       jdk_version: "1.8"
   maxParallel: 
-  
+
 - task: Maven@3
   inputs:
     mavenPomFile: 'pom.xml'
+- task: Maven@3
+  inputs:
+    mavenPomFile: 'pom.xml'
+    publishJUnitResults: true
+    testResultsFiles: '**/surefire-reports/TEST-*.xml'
+    testRunTitle: 'install'
+    javaHomeOption: 'JDKVersion'
+    mavenVersionOption: 'Default'
+    mavenAuthenticateFeed: false
+    sonarQubeRunAnalysis: false
     publishJUnitResults: true
     testResultsFiles: '**/surefire-reports/TEST-*.xml'
     testRunTitle: 'mvn clean install'
