@@ -16,9 +16,7 @@ strategy:
       jdk_version: "1.8"
   maxParallel: 
 
-- task: Maven@3
-  inputs:
-    mavenPomFile: 'pom.xml'
+
 - task: Maven@3
   inputs:
     mavenPomFile: 'pom.xml'
