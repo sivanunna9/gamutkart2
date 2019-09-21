@@ -1,0 +1,51 @@
+pipeline {
+    agent any
+    stages {
+            stage('Checkout') {
+                steps {
+                sh '''
+                 
+                git clone https://sivakiran9:Siva_787@github.com/sivakiran9/kishore.git
+                '''
+                }
+                    }
+                    
+                    stage('Build') {
+                steps {
+                sh '''cd kishore
+                      ls 
+                      mvn clean install
+                      
+                      cp -r target/gamutkart.war devops 
+                      
+                      ''' 
+                }
+               }
+               
+               stage('Building-Image') {
+                steps {
+                    
+                sh '''
+                    cd kishore/devops
+                    ls -ltr
+                   
+                    docker build -t=kiran787/gg:$BUILD_NUMBER .
+                      
+                      '''
+                }
+               }
+               
+               stage('Push docker image') {
+                steps {
+                    
+                sh '''
+                docker login -u kiran787 -p sivakiran
+                docker push kiran787/gg:$BUILD_NUMBER
+                
+                '''
+                }
+        }
+               
+               
+    }
+   }
