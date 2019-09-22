@@ -45,6 +45,23 @@ pipeline {
                 '''
                 }
         }
+
+         stage('Create container') {
+                steps {
+                    
+                sh '''
+                
+                docker rm -f pipeline
+                   sleep 2
+                
+                
+                docker run -itd  --name pipeline -p 8082:8080 kiran787/gg:$BUILD_NUMBER /bin/bash
+               
+                '''
+                 // docker rm -f pipeline
+                   //sleep 2
+                }
+       }
                
                
     }
