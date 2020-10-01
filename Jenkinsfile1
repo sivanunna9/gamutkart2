@@ -5,7 +5,7 @@ pipeline {
                 steps {
                 sh '''
                  
-                git clone https://sivakiran9:Siva_787@github.com/sivakiran9/kishore.git
+                git clone https://sivakiran9:siva@github.com/sivakiran9/kishore.git
                 '''
                 }
                     }
