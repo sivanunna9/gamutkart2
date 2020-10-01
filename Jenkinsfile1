@@ -39,7 +39,7 @@ pipeline {
                 steps {
                     
                 sh '''
-                docker login -u kiran787 -p sivakiran
+                docker login -u kiran787 -p admin
                 docker push kiran787/gg:$BUILD_NUMBER
                 
                 '''
